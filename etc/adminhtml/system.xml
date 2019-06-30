@@ -20,6 +20,19 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
+            <group id="dom-elements" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>DOM Elements</label>
+                <field id="form-selector" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Newsletter Form CSS Selector</label>
+                </field>
+                <field id="message-selector" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Status Message CSS Selector</label>
+                    <comment>* within the newsletter form from above</comment>
+                </field>
+                <field id="modal-selector" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Modal Element CSS Selector</label>
+                </field>
+            </group>
         </section>
     </system>
 </config>

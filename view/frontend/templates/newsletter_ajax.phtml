@@ -1,0 +1,66 @@
+
+<?php 
+
+$helper = $this->helper('Hapex\NewsletterAjax\Helper\Data');
+if ($helper->isEnabled()):
+    
+    $formSelector = $helper->getFormSelector();
+    $messageSelector = $helper->getMessageSelector();
+    $modalSelector = $helper->getModalSelector();
+    ?>
+
+<script>
+require(['jquery','fancybox/js/jquery.fancybox'],function($){
+var form = $('<?=$formSelector;?>');
+
+
+form.submit(function(e) {
+    var f = $(this);
+if(f.validation('isValid')){
+var email = f.find("input").val();
+var url = f.attr('action');
+e.preventDefault();
+try{
+$('<?=$messageSelector;?>').html();
+$.ajax({
+url: url,
+dataType: 'json',
+type: 'POST',
+data: {email: email},
+success: function (data){
+if(data.status != "ERROR"){
+f.find("input").val('');
+f.parent().find('<?=$messageSelector;?>').html('<div class="message-success success message" ><div >' +
+data.msg + '</div></div>');
+window.dataLayer = window.dataLayer || [];
+ window.dataLayer.push({
+ 'event': 'subscribeSuccess'
+ });
+
+}else{
+f.parent().find('<?=$messageSelector;?>').html('<div class="message-error error message" >' +
+'<div>'+data.msg +'</div></div>');
+}
+setTimeout(function(){f.parent().find('<?=$messageSelector;?>').html("")},3000);
+},
+});
+
+<?php 
+
+if ($helper->modalAfterEnabled()):
+    ?>
+if ($("<?=$modalSelector;?>").length)
+{
+    setTimeout(function(){$.fancybox({'type': 'inline','href': '<?=$modalSelector;?>','autoScale': true,'transitionIn': 'fade','transitionOut': 'fade',});},3000);
+}
+
+<?php endif; ?>
+
+} catch (e){
+}
+}
+});
+})
+</script>
+
+<?php endif; ?>

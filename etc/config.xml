@@ -6,6 +6,11 @@
                 <enable>0</enable>
                 <modal-after-enable>0</modal-after-enable>
             </general>
+            <dom-elements>
+                <form-selector>.form.subscribe</form-selector>
+                <message-selector>.scg-msg > .messages</message-selector>
+                <modal-selector>#newsletter_modal_after</modal-selector>
+            </dom-elements>
         </hapex-newsletter-ajax>
     </default>
 </config>
