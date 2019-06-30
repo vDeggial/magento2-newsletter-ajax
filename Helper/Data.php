@@ -11,7 +11,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     
     public function modalAfterEnabled()
     {
-        return $this->scopeConfig->getValue('hapex-newsletter-ajax/general/modal-after-enable',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('hapex-newsletter-ajax/modal/enable',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
     
     public function getFormSelector()
@@ -27,6 +27,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getModalSelector()
     {
         return $this->scopeConfig->getValue('hapex-newsletter-ajax/dom-elements/modal-selector',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+    
+    public function getModalRequireLocation()
+    {
+        return $this->scopeConfig->getValue('hapex-newsletter-ajax/modal/require-location',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
 }

@@ -7,10 +7,11 @@ if ($helper->isEnabled()):
     $formSelector = $helper->getFormSelector();
     $messageSelector = $helper->getMessageSelector();
     $modalSelector = $helper->getModalSelector();
+    $modalRequireLocation = $helper->getModalRequireLocation();
     ?>
 
 <script>
-require(['jquery','fancybox/js/jquery.fancybox'],function($){
+require(['jquery'<? if ($helper->modalAfterEnabled()) echo ",'$modalRequireLocation'"; ?>],function($){
 var form = $('<?=$formSelector;?>');
 
 

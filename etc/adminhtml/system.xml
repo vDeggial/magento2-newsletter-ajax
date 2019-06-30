@@ -15,19 +15,26 @@
                     <label>Module Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="modal-after-enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+            </group>
+            <group id="modal" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>"After" Modal Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Show Modal Dialog After</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="require-location" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>RequireJS Fancybox Include Location</label>
+                    <comment>Relative to view/frontend and do not include .js at the end</comment>
+                </field>
             </group>
-            <group id="dom-elements" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
-                <label>DOM Elements</label>
+            <group id="dom-elements" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>DOM Elements Selectors</label>
                 <field id="form-selector" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Newsletter Form CSS Selector</label>
                 </field>
                 <field id="message-selector" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Status Message CSS Selector</label>
-                    <comment>* within the newsletter form from above</comment>
+                    <comment>Must be within the newsletter form from above</comment>
                 </field>
                 <field id="modal-selector" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Modal Element CSS Selector</label>
