@@ -2,36 +2,38 @@
 
 namespace Hapex\NewsletterAjax\Helper;
 
-class Data extends \Magento\Framework\App\Helper\AbstractHelper
+use \Hapex\Core\Helper\DataHelper;
+
+class Data extends DataHelper
 {
     public function isEnabled()
     {
-        return $this->scopeConfig->getValue('hapex-newsletter-ajax/general/enable',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->getConfigFlag('hapex-newsletter-ajax/general/enable');
     }
     
     public function modalAfterEnabled()
     {
-        return $this->scopeConfig->getValue('hapex-newsletter-ajax/modal/enable',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->getConfigFlag('hapex-newsletter-ajax/modal/enable');
     }
     
     public function getFormSelector()
     {
-        return $this->scopeConfig->getValue('hapex-newsletter-ajax/dom-elements/form-selector',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->getConfigValue('hapex-newsletter-ajax/dom-elements/form-selector');
     }
     
     public function getMessageSelector()
     {
-        return $this->scopeConfig->getValue('hapex-newsletter-ajax/dom-elements/message-selector',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->getConfigValue('hapex-newsletter-ajax/dom-elements/message-selector');
     }
     
     public function getModalSelector()
     {
-        return $this->scopeConfig->getValue('hapex-newsletter-ajax/dom-elements/modal-selector',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->getConfigValue('hapex-newsletter-ajax/dom-elements/modal-selector');
     }
     
     public function getModalRequireLocation()
     {
-        return $this->scopeConfig->getValue('hapex-newsletter-ajax/modal/require-location',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->getConfigValue('hapex-newsletter-ajax/modal/require-location');
     }
 
 }

@@ -11,23 +11,38 @@
             <resource>Hapex_NewsletterAjax::newsletterajax_config</resource>
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>General Configuration</label>
+                <field id="version" translate="label" type="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Version : 1.0.0</label>
+                </field>
                 <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Module Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
             <group id="modal" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+                <depends>
+                    <field id="hapex-newsletter-ajax/general/enable">1</field>
+                </depends>
                 <label>"After" Modal Configuration</label>
                 <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Show Modal Dialog After</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="hapex-newsletter-ajax/general/enable">1</field>
+                    </depends>
                 </field>
                 <field id="require-location" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>RequireJS Fancybox Include Location</label>
                     <comment>Relative to view/frontend and do not include .js at the end</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
                 </field>
             </group>
             <group id="dom-elements" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+                <depends>
+                    <field id="hapex-newsletter-ajax/general/enable">1</field>
+                </depends>
                 <label>DOM Elements Selectors</label>
                 <field id="form-selector" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Newsletter Form CSS Selector</label>
