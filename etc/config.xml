@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <hapex-newsletter-ajax>
+        <hapex_newsletter_ajax>
             <general>
                 <enable>0</enable>
             </general>
-            <dom-elements>
-                <form-selector>.form.subscribe</form-selector>
-                <message-selector>.scg-msg > .messages</message-selector>
-                <modal-selector>#newsletter_modal_after</modal-selector>
-            </dom-elements>
+            <dom_elements>
+                <form_selector>.form.subscribe</form_selector>
+                <message_selector>.scg-msg > .messages</message_selector>
+                <modal_selector>#newsletter_modal_after</modal_selector>
+            </dom_elements>
             <modal>
                 <enable>0</enable>
-                <require-location>fancybox/js/jquery.fancybox</require-location>
+                <require_location>fancybox/js/jquery.fancybox</require_location>
             </modal>
-        </hapex-newsletter-ajax>
+        </hapex_newsletter_ajax>
     </default>
 </config>

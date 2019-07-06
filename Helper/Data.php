@@ -8,32 +8,32 @@ class Data extends DataHelper
 {
     public function isEnabled()
     {
-        return $this->getConfigFlag('hapex-newsletter-ajax/general/enable');
+        return $this->getConfigFlag('hapex_newsletter_ajax/general/enable');
     }
     
     public function modalAfterEnabled()
     {
-        return $this->getConfigFlag('hapex-newsletter-ajax/modal/enable');
+        return $this->getConfigFlag('hapex_newsletter_ajax/modal/enable');
     }
     
     public function getFormSelector()
     {
-        return $this->getConfigValue('hapex-newsletter-ajax/dom-elements/form-selector');
+        return $this->getConfigValue('hapex_newsletter_ajax/dom_elements/form_selector');
     }
     
     public function getMessageSelector()
     {
-        return $this->getConfigValue('hapex-newsletter-ajax/dom-elements/message-selector');
+        return $this->getConfigValue('hapex_newsletter_ajax/dom_elements/message_selector');
     }
     
     public function getModalSelector()
     {
-        return $this->getConfigValue('hapex-newsletter-ajax/dom-elements/modal-selector');
+        return $this->getConfigValue('hapex_newsletter_ajax/dom_elements/modal_selector');
     }
     
     public function getModalRequireLocation()
     {
-        return $this->getConfigValue('hapex-newsletter-ajax/modal/require-location');
+        return $this->getConfigValue('hapex_newsletter_ajax/modal/require_location');
     }
 
 }
