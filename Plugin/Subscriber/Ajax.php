@@ -53,7 +53,7 @@ class Ajax extends \Magento\Newsletter\Controller\Subscriber\NewAction {
         }
         else
         {
-            parent::execute($subject,$procede);
+            $this->getResponse()->setRedirect($this->_redirect->getRedirectUrl());
         }
     }
     
