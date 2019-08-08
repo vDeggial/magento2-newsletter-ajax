@@ -9,5 +9,6 @@ Magento 2.x.x Newsletter subscription via AJAX calls
 ## Installation
 - Upload files to `app/code/Hapex/NewsletterAjax`
 - Run `php bin/magento setup:upgrade` in CLI
+- Run `php bin/magento setup:di:compile` in CLI
 - Run `php bin/magento setup:static-content:deploy -f` in CLI
 - Run `php bin/magento cache:flush` in CLI
