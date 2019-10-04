@@ -4,7 +4,7 @@
         <tab id="hapex" translate="label" sortOrder="100">
             <label>Hapex</label>
         </tab>
-        <section id="hapex_newsletter_ajax" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="hapex_newsletter_ajax" translate="label" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator_top</class>
             <label>Newsletter Ajax</label>
             <tab>hapex</tab>
