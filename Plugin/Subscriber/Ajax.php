@@ -27,30 +27,36 @@ class Ajax extends \Magento\Newsletter\Controller\Subscriber\NewAction {
     }
 
     public function aroundExecute($subject, $procede) {
-        if ($this->dataHelper->isEnabled())
+        switch($this->dataHelper->isEnabled())
         {
-            if ($this->isValidRequest()) {
-                $email = $this->getEmail();
-                try {
-                    if ($this->isSubscriber($email)) {
-                        return $this->generateResponse("ERROR", "This email address is already subscribed.");
-                    } else {
-                        $status = $this->subscribeEmail($email);
-                        
-                        return ($status == \Magento\Newsletter\Model\Subscriber::STATUS_NOT_ACTIVE) ? $this->generateResponse("OK", "The confirmation request has been sent.") : $this->generateResponse("OK", "Thank you for your subscription.") ;
-                    }
+            case true:
+                switch($this->isValidRequest())
+                {
+                    case true:
+                        $email = $this->getEmail();
+                        try {
+                            switch($this->isSubscriber($email))
+                            {
+                                case true:
+                                    return $this->generateResponse("ERROR", "This email address is already subscribed.");
+                                    break;
+                                default:
+                                    $status = $this->subscribeEmail($email);
+                                    return ($status == \Magento\Newsletter\Model\Subscriber::STATUS_NOT_ACTIVE) ? $this->generateResponse("OK", "The confirmation request has been sent.") : $this->generateResponse("OK", "Thank you for your subscription.") ;
+                                    break;
+                            }
+                        }
+                        catch(\Magento\Framework\Exception\LocalizedException $e) {
+                            return $this->generateResponse("ERROR", "There was a problem with the subscription: $e->getMessage()");
+                        }
+                        catch(\Exception $e) {
+                            return $this->generateResponse("ERROR", "Something went wrong with the subscription.");
+                        }
+                        break;
                 }
-                catch(\Magento\Framework\Exception\LocalizedException $e) {
-                    return $this->generateResponse("ERROR", "There was a problem with the subscription: $e->getMessage()");
-                }
-                catch(\Exception $e) {
-                    return $this->generateResponse("ERROR", "Something went wrong with the subscription.");
-                }
-            }
-        }
-        else
-        {
-            $this->getResponse()->setRedirect($this->_redirect->getRedirectUrl());
+                break;
+            default:
+                $this->getResponse()->setRedirect($this->_redirect->getRedirectUrl());
         }
     }
     
