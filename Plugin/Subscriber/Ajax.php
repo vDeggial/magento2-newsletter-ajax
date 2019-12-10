@@ -39,11 +39,9 @@ class Ajax extends \Magento\Newsletter\Controller\Subscriber\NewAction {
                             {
                                 case true:
                                     return $this->generateResponse("ERROR", "This email address is already subscribed.");
-                                    break;
                                 default:
                                     $status = $this->subscribeEmail($email);
                                     return ($status == \Magento\Newsletter\Model\Subscriber::STATUS_NOT_ACTIVE) ? $this->generateResponse("OK", "The confirmation request has been sent.") : $this->generateResponse("OK", "Thank you for your subscription.") ;
-                                    break;
                             }
                         }
                         catch(\Magento\Framework\Exception\LocalizedException $e) {
