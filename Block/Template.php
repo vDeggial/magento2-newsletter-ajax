@@ -1,5 +1,6 @@
 <?php
 namespace Hapex\NewsletterAjax\Block;
-class Template extends \Magento\Framework\View\Element\Template
+use Hapex\Core\Block\BaseTemplate;
+class Template extends BaseTemplate
 {
 }
