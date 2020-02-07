@@ -2,7 +2,7 @@
 /**
  *
  */
-namespace Hapex\NewsletterAjax\Plugin\Subscriber;
+namespace Hapex\NewsletterAjax\Controller\Subscriber;
 use Magento\Customer\Api\AccountManagementInterface as CustomerAccountManagement;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Url as CustomerUrl;
