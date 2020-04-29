@@ -54,7 +54,6 @@ class Ajax extends \Magento\Newsletter\Controller\Subscriber\NewAction
             break;
             default:
                 $this->getResponse()->setRedirect($this->_redirect->getRedirectUrl());
-								$procede();
                 break;
         }
     }
