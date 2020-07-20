@@ -45,8 +45,10 @@ class Ajax extends \Magento\Newsletter\Controller\Subscriber\NewAction
                                     return ($status == \Magento\Newsletter\Model\Subscriber::STATUS_NOT_ACTIVE) ? $this->generateResponse("OK", "The confirmation request has been sent.") : $this->generateResponse("OK", "Thank you for your subscription.");
                             }
                         } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                            $this->dataHelper->errorLog(__METHOD__, $e->getMessage());
                             return $this->generateResponse("ERROR", "There was a problem with the subscription: " . $e->getMessage());
                         } catch (\Exception $e) {
+                            $this->dataHelper->errorLog(__METHOD__, $e->getMessage());
                             return $this->generateResponse("ERROR", "Something went wrong with the subscription.");
                         }
                     break;
