@@ -33,23 +33,28 @@ class Ajax extends \Magento\Newsletter\Controller\Subscriber\NewAction
     {
         switch ($this->dataHelper->isEnabled()) {
             case true:
+            $response = "";
                 switch ($this->isValidRequest()) {
                     case true:
                         $email = $this->getEmail();
                         try {
                             switch ($this->isSubscriber($email)) {
                                 case true:
-                                    return $this->generateResponse("ERROR", "This email address is already subscribed.");
+                                    $response = $this->generateResponse("ERROR", "This email address is already subscribed.");
+                                    break;
                                 default:
                                     $status = $this->subscribeEmail($email);
-                                    return ($status == \Magento\Newsletter\Model\Subscriber::STATUS_NOT_ACTIVE) ? $this->generateResponse("OK", "The confirmation request has been sent.") : $this->generateResponse("OK", "Thank you for your subscription.");
+                                    $response = ($status == \Magento\Newsletter\Model\Subscriber::STATUS_NOT_ACTIVE) ? $this->generateResponse("OK", "The confirmation request has been sent.") : $this->generateResponse("OK", "Thank you for your subscription.");
+                                    break;
                             }
                         } catch (\Magento\Framework\Exception\LocalizedException $e) {
                             $this->dataHelper->getLogHelper()->errorLog(__METHOD__, $e->getMessage());
-                            return $this->generateResponse("ERROR", "There was a problem with the subscription: " . $e->getMessage());
+                            $response = $this->generateResponse("ERROR", "There was a problem with the subscription: " . $e->getMessage());
                         } catch (\Exception $e) {
                             $this->dataHelper->getLogHelper()->errorLog(__METHOD__, $e->getMessage());
-                            return $this->generateResponse("ERROR", "Something went wrong with the subscription.");
+                            $response = $this->generateResponse("ERROR", "Something went wrong with the subscription.");
+                        } finally {
+                            return $response;
                         }
                     break;
                 }
