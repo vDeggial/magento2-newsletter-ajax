@@ -1,9 +1,9 @@
 <?php
 namespace Hapex\NewsletterAjax\Helper;
 
+use Hapex\Core\Helper\DataHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\ObjectManagerInterface;
-use \Hapex\Core\Helper\DataHelper;
 
 class Data extends DataHelper
 {
