@@ -4,13 +4,13 @@
  */
 namespace Hapex\NewsletterAjax\Controller\Subscriber;
 
+use Hapex\NewsletterAjax\Helper\Data;
 use Magento\Customer\Api\AccountManagementInterface as CustomerAccountManagement;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Framework\App\Action\Context;
-use Magento\Store\Model\StoreManagerInterface;
 use Magento\Newsletter\Model\SubscriberFactory;
-use Hapex\NewsletterAjax\Helper\Data;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class Ajax
@@ -33,7 +33,7 @@ class Ajax extends \Magento\Newsletter\Controller\Subscriber\NewAction
     {
         switch ($this->dataHelper->isEnabled()) {
             case true:
-            $response = "";
+                $response = "";
                 switch ($this->isValidRequest()) {
                     case true:
                         $email = $this->getEmail();
@@ -56,9 +56,9 @@ class Ajax extends \Magento\Newsletter\Controller\Subscriber\NewAction
                         } finally {
                             return $response;
                         }
-                    break;
+                        break;
                 }
-            break;
+                break;
             default:
                 $this->getResponse()->setRedirect($this->_redirect->getRedirectUrl());
                 break;
@@ -67,13 +67,13 @@ class Ajax extends \Magento\Newsletter\Controller\Subscriber\NewAction
 
     private function generateResponse($status, $message)
     {
-        $response = ['status' => "$status", 'msg' => __("$message") ];
+        $response = ['status' => "$status", 'msg' => __("$message")];
         return $this->resultJsonFactory->create()->setData($response);
     }
 
     private function getEmail()
     {
-        return (string)$this->getRequest()->getPost('email');
+        return (string) $this->getRequest()->getPost('email');
     }
 
     private function isSubscriber($email)
