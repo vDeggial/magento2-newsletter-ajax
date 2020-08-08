@@ -1,21 +1,17 @@
 <?php
-/**
- *
- */
+
 namespace Hapex\NewsletterAjax\Controller\Subscriber;
 
-use Hapex\NewsletterAjax\Helper\Data;
-use Magento\Customer\Api\AccountManagementInterface as CustomerAccountManagement;
 use Magento\Customer\Model\Session;
-use Magento\Customer\Model\Url as CustomerUrl;
+use Hapex\NewsletterAjax\Helper\Data;
 use Magento\Framework\App\Action\Context;
-use Magento\Newsletter\Model\SubscriberFactory;
+use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Newsletter\Model\SubscriberFactory;
+use \Magento\Newsletter\Controller\Subscriber\NewAction;
+use Magento\Customer\Api\AccountManagementInterface as CustomerAccountManagement;
 
-/**
- * Class Ajax
- */
-class Ajax extends \Magento\Newsletter\Controller\Subscriber\NewAction
+class Ajax extends NewAction
 {
     protected $customerManagement;
     protected $resultJsonFactory;

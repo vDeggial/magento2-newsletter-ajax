@@ -1,4 +1,5 @@
 <?php
+
 namespace Hapex\NewsletterAjax\Helper;
 
 use Hapex\Core\Helper\DataHelper;
@@ -42,5 +43,4 @@ class Data extends DataHelper
     {
         return $this->getConfigValue('hapex_newsletter_ajax/modal/require_location');
     }
-
 }
