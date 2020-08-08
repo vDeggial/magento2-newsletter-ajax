@@ -2,6 +2,7 @@
 
 namespace Hapex\NewsletterAjax\Controller\Subscriber;
 
+use Hapex\Core\Helper\LogHelper;
 use Magento\Customer\Model\Session;
 use Hapex\NewsletterAjax\Helper\Data;
 use Magento\Framework\App\Action\Context;
@@ -10,19 +11,22 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Newsletter\Model\SubscriberFactory;
 use \Magento\Newsletter\Controller\Subscriber\NewAction;
 use Magento\Customer\Api\AccountManagementInterface as CustomerAccountManagement;
+use Magento\Framework\Controller\Result\JsonFactory;
 
 class Ajax extends NewAction
 {
     protected $customerManagement;
     protected $resultJsonFactory;
     protected $dataHelper;
+    protected $logHelper;
 
-    public function __construct(Context $context, SubscriberFactory $subscriberFactory, Session $customerSession, StoreManagerInterface $storeManager, CustomerUrl $customerUrl, CustomerAccountManagement $customerManagement, \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory, Data $dataHelper)
+    public function __construct(Context $context, SubscriberFactory $subscriberFactory, Session $customerSession, StoreManagerInterface $storeManager, CustomerUrl $customerUrl, CustomerAccountManagement $customerManagement, JsonFactory $resultJsonFactory, Data $dataHelper)
     {
         $this->customerManagement = $customerManagement;
         $this->resultJsonFactory = $resultJsonFactory;
         parent::__construct($context, $subscriberFactory, $customerSession, $storeManager, $customerUrl, $customerManagement);
         $this->dataHelper = $dataHelper;
+        $this->logHelper = $this->dataHelper->generateClassObject(LogHelper::class);
     }
 
     public function aroundExecute($subject, $procede)
@@ -44,10 +48,10 @@ class Ajax extends NewAction
                                     break;
                             }
                         } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                            $this->dataHelper->getLogHelper()->errorLog(__METHOD__, $e->getMessage());
+                            $this->logHelper->errorLog(__METHOD__, $e->getMessage());
                             $response = $this->generateResponse("ERROR", "There was a problem with the subscription: " . $e->getMessage());
                         } catch (\Exception $e) {
-                            $this->dataHelper->getLogHelper()->errorLog(__METHOD__, $e->getMessage());
+                            $this->logHelper->errorLog(__METHOD__, $e->getMessage());
                             $response = $this->generateResponse("ERROR", "Something went wrong with the subscription.");
                         } finally {
                             return $response;
