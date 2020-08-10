@@ -17,21 +17,30 @@ class Ajax extends NewAction
 {
     protected $customerManagement;
     protected $resultJsonFactory;
-    protected $dataHelper;
-    protected $logHelper;
+    protected $helperData;
+    protected $helperLog;
 
-    public function __construct(Context $context, SubscriberFactory $subscriberFactory, Session $customerSession, StoreManagerInterface $storeManager, CustomerUrl $customerUrl, CustomerAccountManagement $customerManagement, JsonFactory $resultJsonFactory, Data $dataHelper)
-    {
+    public function __construct(
+        Context $context,
+        SubscriberFactory $subscriberFactory,
+        Session $customerSession,
+        StoreManagerInterface $storeManager,
+        CustomerUrl $customerUrl,
+        CustomerAccountManagement $customerManagement,
+        JsonFactory $resultJsonFactory,
+        Data $helperData,
+        LogHelper $helperLog
+    ) {
         $this->customerManagement = $customerManagement;
         $this->resultJsonFactory = $resultJsonFactory;
         parent::__construct($context, $subscriberFactory, $customerSession, $storeManager, $customerUrl, $customerManagement);
-        $this->dataHelper = $dataHelper;
-        $this->logHelper = $this->dataHelper->generateClassObject(LogHelper::class);
+        $this->helperData = $helperData;
+        $this->helperLog = $helperLog;
     }
 
     public function aroundExecute($subject, $procede)
     {
-        switch ($this->dataHelper->isEnabled()) {
+        switch ($this->helperData->isEnabled()) {
             case true:
                 $response = "";
                 switch ($this->isValidRequest()) {
@@ -48,10 +57,10 @@ class Ajax extends NewAction
                                     break;
                             }
                         } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                            $this->logHelper->errorLog(__METHOD__, $e->getMessage());
+                            $this->helperLog->errorLog(__METHOD__, $e->getMessage());
                             $response = $this->generateResponse("ERROR", "There was a problem with the subscription: " . $e->getMessage());
                         } catch (\Exception $e) {
-                            $this->logHelper->errorLog(__METHOD__, $e->getMessage());
+                            $this->helperLog->errorLog(__METHOD__, $e->getMessage());
                             $response = $this->generateResponse("ERROR", "Something went wrong with the subscription.");
                         } finally {
                             return $response;
