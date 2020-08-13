@@ -42,36 +42,45 @@ class Ajax extends NewAction
     {
         switch ($this->helperData->isEnabled()) {
             case true:
-                $response = "";
                 switch ($this->isValidRequest()) {
                     case true:
-                        $email = $this->getEmail();
-                        try {
-                            switch ($this->isSubscriber($email)) {
-                                case true:
-                                    $response = $this->generateResponse("ERROR", "This email address is already subscribed.");
-                                    break;
-                                default:
-                                    $status = $this->subscribeEmail($email);
-                                    $response = ($status == \Magento\Newsletter\Model\Subscriber::STATUS_NOT_ACTIVE) ? $this->generateResponse("OK", "The confirmation request has been sent.") : $this->generateResponse("OK", "Thank you for your subscription.");
-                                    break;
-                            }
-                        } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                            $this->helperLog->errorLog(__METHOD__, $e->getMessage());
-                            $response = $this->generateResponse("ERROR", "There was a problem with the subscription: " . $e->getMessage());
-                        } catch (\Exception $e) {
-                            $this->helperLog->errorLog(__METHOD__, $e->getMessage());
-                            $response = $this->generateResponse("ERROR", "Something went wrong with the subscription.");
-                        } finally {
-                            return $response;
-                        }
-                        break;
+                        return $this->processRequest();
                 }
                 break;
             default:
                 $this->getResponse()->setRedirect($this->_redirect->getRedirectUrl());
                 break;
         }
+    }
+
+    private function processRequest()
+    {
+        $email = $this->getEmail();
+        try {
+            switch ($this->isSubscriber($email)) {
+                case true:
+                    $response = $this->generateResponse("ERROR", "This email address is already subscribed.");
+                    break;
+                default:
+                    $response = $this->getSubscribeResponse($email);
+                    break;
+            }
+        } catch (\Magento\Framework\Exception\LocalizedException $e) {
+            $this->helperLog->errorLog(__METHOD__, $e->getMessage());
+            $response = $this->generateResponse("ERROR", "There was a problem with the subscription: " . $e->getMessage());
+        } catch (\Exception $e) {
+            $this->helperLog->errorLog(__METHOD__, $e->getMessage());
+            $response = $this->generateResponse("ERROR", "Something went wrong with the subscription.");
+        } finally {
+            return $response;
+        }
+    }
+
+    private function getSubscribeResponse($email = null)
+    {
+        $status = $this->_subscriberFactory->create()->subscribe($email);
+        $response = ($status == \Magento\Newsletter\Model\Subscriber::STATUS_NOT_ACTIVE) ? $this->generateResponse("OK", "The confirmation request has been sent.") : $this->generateResponse("OK", "Thank you for your subscription.");
+        return $response;
     }
 
     private function generateResponse($status, $message)
@@ -97,10 +106,5 @@ class Ajax extends NewAction
     private function isValidRequest()
     {
         return $this->getRequest()->isPost() && $this->getRequest()->getPost('email');
-    }
-
-    private function subscribeEmail($email)
-    {
-        return $this->_subscriberFactory->create()->subscribe($email);
     }
 }
