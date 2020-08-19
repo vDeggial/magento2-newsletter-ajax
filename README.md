@@ -5,7 +5,7 @@ Magento 2.x.x Newsletter subscription via AJAX calls
 ## Requirements
 
 *   Magento 2.x.x
-*   [Hapex Core module](https://github.com/vDeggial/magento2-core)
+*   [Hapex Core module](https://gitlab.com/deggial/magento2-core)
 
 ## Installation
 
