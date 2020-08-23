@@ -8,6 +8,12 @@ use Magento\Framework\ObjectManagerInterface;
 
 class Data extends DataHelper
 {
+    protected const XML_PATH_CONFIG_ENABLED = "hapex_newsletter_ajax/general/enable";
+    protected const XML_PATH_CONFIG_MODAL_ENABLED = "hapex_newsletter_ajax/modal/enable";
+    protected const XML_PATH_CONFIG_SELECTOR_FORM = "hapex_newsletter_ajax/dom_elements/form_selector";
+    protected const XML_PATH_CONFIG_SELECTOR_MESSAGE = "hapex_newsletter_ajax/dom_elements/message_selector";
+    protected const XML_PATH_CONFIG_SELECTOR_MODAL = "hapex_newsletter_ajax/dom_elements/modal_selector";
+    protected const XML_PATH_CONFIG_REQUIRE_LOCATION = "hapex_newsletter_ajax/modal/require_location";
     public function __construct(Context $context, ObjectManagerInterface $objectManager)
     {
 
@@ -16,31 +22,31 @@ class Data extends DataHelper
 
     public function isEnabled()
     {
-        return $this->getConfigFlag('hapex_newsletter_ajax/general/enable');
+        return $this->getConfigFlag(self::XML_PATH_CONFIG_ENABLED);
     }
 
     public function modalAfterEnabled()
     {
-        return $this->getConfigFlag('hapex_newsletter_ajax/modal/enable');
+        return $this->getConfigFlag(self::XML_PATH_CONFIG_MODAL_ENABLED);
     }
 
     public function getFormSelector()
     {
-        return $this->getConfigValue('hapex_newsletter_ajax/dom_elements/form_selector');
+        return $this->getConfigValue(self::XML_PATH_CONFIG_SELECTOR_FORM);
     }
 
     public function getMessageSelector()
     {
-        return $this->getConfigValue('hapex_newsletter_ajax/dom_elements/message_selector');
+        return $this->getConfigValue(self::XML_PATH_CONFIG_SELECTOR_MESSAGE);
     }
 
     public function getModalSelector()
     {
-        return $this->getConfigValue('hapex_newsletter_ajax/dom_elements/modal_selector');
+        return $this->getConfigValue(self::XML_PATH_CONFIG_SELECTOR_MODAL);
     }
 
     public function getModalRequireLocation()
     {
-        return $this->getConfigValue('hapex_newsletter_ajax/modal/require_location');
+        return $this->getConfigValue(self::XML_PATH_CONFIG_REQUIRE_LOCATION);
     }
 }
