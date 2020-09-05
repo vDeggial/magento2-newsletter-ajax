@@ -3,8 +3,6 @@
 namespace Hapex\NewsletterAjax\Helper;
 
 use Hapex\Core\Helper\DataHelper;
-use Magento\Framework\App\Helper\Context;
-use Magento\Framework\ObjectManagerInterface;
 
 class Data extends DataHelper
 {
@@ -14,11 +12,6 @@ class Data extends DataHelper
     protected const XML_PATH_CONFIG_SELECTOR_MESSAGE = "hapex_newsletter_ajax/dom_elements/message_selector";
     protected const XML_PATH_CONFIG_SELECTOR_MODAL = "hapex_newsletter_ajax/dom_elements/modal_selector";
     protected const XML_PATH_CONFIG_REQUIRE_LOCATION = "hapex_newsletter_ajax/modal/require_location";
-    public function __construct(Context $context, ObjectManagerInterface $objectManager)
-    {
-
-        parent::__construct($context, $objectManager);
-    }
 
     public function isEnabled()
     {
