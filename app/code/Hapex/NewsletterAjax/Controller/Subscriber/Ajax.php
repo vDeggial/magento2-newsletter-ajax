@@ -65,10 +65,10 @@ class Ajax extends NewAction
                     $response = $this->getSubscribeResponse($email);
                     break;
             }
-        } catch (\Magento\Framework\Exception\LocalizedException $e) {
+        } catch (\Magento\Framework\Throwable\LocalizedException $e) {
             $this->helperLog->errorLog(__METHOD__, $e->getMessage());
             $response = $this->generateResponse("ERROR", "There was a problem with the subscription: " . $e->getMessage());
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $this->helperLog->errorLog(__METHOD__, $e->getMessage());
             $response = $this->generateResponse("ERROR", "Something went wrong with the subscription.");
         } finally {
