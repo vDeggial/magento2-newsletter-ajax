@@ -12,6 +12,8 @@ use Magento\Newsletter\Model\SubscriberFactory;
 use \Magento\Newsletter\Controller\Subscriber\NewAction;
 use Magento\Customer\Api\AccountManagementInterface as CustomerAccountManagement;
 use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Newsletter\Model\SubscriptionManager as subscriptionManager;
+use Magento\Framework\Validator\EmailAddress as Validator;
 
 class Ajax extends NewAction
 {
@@ -29,11 +31,13 @@ class Ajax extends NewAction
         CustomerAccountManagement $customerManagement,
         JsonFactory $resultJsonFactory,
         Data $helperData,
-        LogHelper $helperLog
+        LogHelper $helperLog,
+        subscriptionManager $subscriptionManager,
+        Validator $formKeyValidator = null
     ) {
         $this->customerManagement = $customerManagement;
         $this->resultJsonFactory = $resultJsonFactory;
-        parent::__construct($context, $subscriberFactory, $customerSession, $storeManager, $customerUrl, $customerManagement);
+        parent::__construct($context, $subscriberFactory, $customerSession, $storeManager, $customerUrl, $customerManagement, $subscriptionManager, $formKeyValidator);
         $this->helperData = $helperData;
         $this->helperLog = $helperLog;
     }
